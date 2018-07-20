@@ -101,9 +101,6 @@ MAKEFLAGS += --no-print-directory
 $(shell mkdir -p $(SUBDIRS))
 
 all: $(ROM)
-ifeq ($(COMPARE),1)
-	@$(SHA1SUM) $(BUILD_NAME).sha1
-endif
 
 clean: tidy
 	find sound/direct_sound_samples \( -iname '*.bin' \) -exec rm {} +
