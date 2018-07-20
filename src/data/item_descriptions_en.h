@@ -6,16 +6,16 @@ static const u8 gItemDescription_MasterBall[] = _(
 static const u8 gItemDescription_UltraBall[] = _(
     "A better BALL with\n"
     "a higher catch rate\n"
-    "than a GREAT BALL.");
+    "than a ROBBER BALL.");
 
 static const u8 gItemDescription_GreatBall[] = _(
     "A good BALL with a\n"
     "higher catch rate\n"
-    "than a POKé BALL.");
+    "than a THIEF BALL.");
 
 static const u8 gItemDescription_PokeBall[] = _(
     "A tool used for\n"
-    "catching wild\n"
+    "stealing trainer\n"
     "POKéMON.");
 
 static const u8 gItemDescription_SafariBall[] = _(

@@ -17,7 +17,7 @@ const struct Item gItems[] =
         .secondaryId = 0,
     },
     {
-        .name = _("MASTER BALL"),
+        .name = _("HEIST BALL"),
         .itemId = ITEM_MASTER_BALL,
         .price = 0,
         .holdEffect = HOLD_EFFECT_NONE,
@@ -33,7 +33,7 @@ const struct Item gItems[] =
         .secondaryId = 0,
     },
     {
-        .name = _("ULTRA BALL"),
+        .name = _("BURGLER BALL"),
         .itemId = ITEM_ULTRA_BALL,
         .price = 1200,
         .holdEffect = HOLD_EFFECT_NONE,
@@ -49,7 +49,7 @@ const struct Item gItems[] =
         .secondaryId = 1,
     },
     {
-        .name = _("GREAT BALL"),
+        .name = _("ROBBER BALL"),
         .itemId = ITEM_GREAT_BALL,
         .price = 600,
         .holdEffect = HOLD_EFFECT_NONE,
@@ -65,7 +65,7 @@ const struct Item gItems[] =
         .secondaryId = 2,
     },
     {
-        .name = _("POKé BALL"),
+        .name = _("THIEF BALL"),
         .itemId = ITEM_POKE_BALL,
         .price = 200,
         .holdEffect = HOLD_EFFECT_NONE,
