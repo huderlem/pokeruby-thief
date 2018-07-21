@@ -81,7 +81,7 @@ const struct Item gItems[] =
         .secondaryId = 3,
     },
     {
-        .name = _("SAFARI BALL"),
+        .name = _("POACHER BALL"),
         .itemId = ITEM_SAFARI_BALL,
         .price = 0,
         .holdEffect = HOLD_EFFECT_NONE,
@@ -97,7 +97,7 @@ const struct Item gItems[] =
         .secondaryId = 4,
     },
     {
-        .name = _("NET BALL"),
+        .name = _("MUGGER BALL"),
         .itemId = ITEM_NET_BALL,
         .price = 1000,
         .holdEffect = HOLD_EFFECT_NONE,
@@ -113,7 +113,7 @@ const struct Item gItems[] =
         .secondaryId = 5,
     },
     {
-        .name = _("DIVE BALL"),
+        .name = _("PIRATE BALL"),
         .itemId = ITEM_DIVE_BALL,
         .price = 1000,
         .holdEffect = HOLD_EFFECT_NONE,
@@ -129,7 +129,7 @@ const struct Item gItems[] =
         .secondaryId = 6,
     },
     {
-        .name = _("NEST BALL"),
+        .name = _("BANDIT BALL"),
         .itemId = ITEM_NEST_BALL,
         .price = 1000,
         .holdEffect = HOLD_EFFECT_NONE,
@@ -145,7 +145,7 @@ const struct Item gItems[] =
         .secondaryId = 7,
     },
     {
-        .name = _("REPEAT BALL"),
+        .name = _("KLEPTO BALL"),
         .itemId = ITEM_REPEAT_BALL,
         .price = 1000,
         .holdEffect = HOLD_EFFECT_NONE,
@@ -161,7 +161,7 @@ const struct Item gItems[] =
         .secondaryId = 8,
     },
     {
-        .name = _("TIMER BALL"),
+        .name = _("CROOK BALL"),
         .itemId = ITEM_TIMER_BALL,
         .price = 1000,
         .holdEffect = HOLD_EFFECT_NONE,
@@ -177,7 +177,7 @@ const struct Item gItems[] =
         .secondaryId = 9,
     },
     {
-        .name = _("LUXURY BALL"),
+        .name = _("LOOTER BALL"),
         .itemId = ITEM_LUXURY_BALL,
         .price = 1000,
         .holdEffect = HOLD_EFFECT_NONE,
@@ -193,7 +193,7 @@ const struct Item gItems[] =
         .secondaryId = 10,
     },
     {
-        .name = _("PREMIER BALL"),
+        .name = _("RAIDER BALL"),
         .itemId = ITEM_PREMIER_BALL,
         .price = 200,
         .holdEffect = HOLD_EFFECT_NONE,
