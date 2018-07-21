@@ -2945,6 +2945,11 @@ BattleScript_FaintTarget:: @ 81D8C65
 	printstring BATTLE_TEXT_DefendingFainted
 	return
 
+BattleScript_FaintCaughtTarget:: @ 81D8C65
+	dofaintanimation TARGET
+	cleareffectsonfaint TARGET
+	finishaction
+
 BattleScript_GiveExp:: @ 81D8C72
 	setbyte sGIVEEXP_STATE, 0
 	getexp TARGET

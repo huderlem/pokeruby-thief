@@ -293,6 +293,7 @@ extern u8 BattleScript_SuccessForceOut[]; //bs random switchout
 extern u8 BattleScript_PrintPayDayMoneyString[]; //bs payday money give
 extern u8 BattleScript_FaintAttacker[];
 extern u8 BattleScript_FaintTarget[];
+extern u8 BattleScript_FaintCaughtTarget[];
 extern u8 BattleScript_DestinyBondTakesLife[];
 extern u8 BattleScript_SelectingImprisionedMoveInPalace[];
 
@@ -5111,6 +5112,7 @@ static void atk19_tryfaintmon(void)
             bank = gBankAttacker;
             r4 = BattleScript_FaintTarget;
         }
+
         if (!(gAbsentBattlerFlags & gBitTable[gActiveBattler])
          && gBattleMons[gActiveBattler].hp == 0)
         {
@@ -15690,13 +15692,7 @@ void atkEF_handleballthrow(void)
 
     gActiveBattler = gBankAttacker;
     gBankTarget = gBankAttacker ^ 1;
-    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-    {
-        EmitBallThrow(0, 5);
-        MarkBufferBankForExecution(gActiveBattler);
-        gBattlescriptCurrInstr = BattleScript_TrainerBallBlock;
-    }
-    else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL)
+    if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL)
     {
         EmitBallThrow(0, 4);
         MarkBufferBankForExecution(gActiveBattler);
@@ -15815,10 +15811,31 @@ void atkEF_handleballthrow(void)
 
 static void atkF0_givecaughtmon(void)
 {
-    GiveMonToPlayer(&gEnemyParty[gBattlerPartyIndexes[gBankAttacker ^ 1]]);
-    gBattleResults.caughtPoke = gBattleMons[gBankAttacker ^ 1].species;
-    GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBankAttacker ^ 1]], MON_DATA_NICKNAME, gBattleResults.caughtNick);
-    gBattlescriptCurrInstr++;
+    u8 bank;
+    int zero;
+
+    GiveMonToPlayerFromTrainer(&gEnemyParty[gBattlerPartyIndexes[gBankAttacker ^ 1]]);
+    zero = 0;
+    gBattleMons[gBankAttacker ^ 1].hp = zero;
+    SetMonData(&gEnemyParty[gBattlerPartyIndexes[gBankAttacker ^ 1]], MON_DATA_HP, &zero);
+
+    gActiveBattler = gBankTarget;
+    bank = gBankAttacker;
+
+    ewram160ACarr2(0, bank) = 0;
+    ewram160ACarr2(1, bank) = 0;
+    ewram16100arr2(0, bank) = 0;
+    ewram16100arr2(1, bank) = 0;
+    ewram16100arr2(2, bank) = 0;
+    ewram16100arr2(3, bank) = 0;
+
+    gHitMarker |= HITMARKER_FAINTED(gActiveBattler);
+    BattleScriptPush(gBattlescriptCurrInstr + 7);
+    gBattlescriptCurrInstr = BattleScript_FaintCaughtTarget;
+
+    if (gBattleResults.opponentFaintCounter < 0xFF)
+        gBattleResults.opponentFaintCounter++;
+    gBattleResults.lastOpponentSpecies = gBattleMons[gActiveBattler].species;
 }
 
 static void atkF1_trysetcaughtmondexflags(void)
@@ -15976,68 +15993,10 @@ void nullsub_6(void)
 
 static void atkF3_trygivecaughtmonnick(void)
 {
-    switch (gBattleCommunication[0])
-    {
-    case 0:
-        sub_8023A80();
-        gBattleCommunication[0]++;
-        gBattleCommunication[1] = 0;
-        sub_802BC6C();
-        break;
-    case 1:
-        if (gMain.newKeys & DPAD_UP && gBattleCommunication[1] != 0)
-        {
-            PlaySE(SE_SELECT);
-            nullsub_6();
-            gBattleCommunication[1] = 0;
-            sub_802BC6C();
-        }
-        if (gMain.newKeys & DPAD_DOWN && gBattleCommunication[1] == 0)
-        {
-            PlaySE(SE_SELECT);
-            nullsub_6();
-            gBattleCommunication[1] = 1;
-            sub_802BC6C();
-        }
-        if (gMain.newKeys & A_BUTTON)
-        {
-            PlaySE(SE_SELECT);
-            if (gBattleCommunication[1] == 0)
-            {
-                gBattleCommunication[0]++;
-                BeginFastPaletteFade(3);
-            }
-            else
-                gBattleCommunication[0] = 4;
-        }
-        else if (gMain.newKeys & B_BUTTON)
-        {
-            PlaySE(SE_SELECT);
-            gBattleCommunication[0] = 4;
-        }
-        break;
-    case 2:
-        if (!gPaletteFade.active)
-        {
-            GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBankAttacker ^ 1]], MON_DATA_NICKNAME, gBattleStruct->caughtNick);
-            DoNamingScreen(2, gBattleStruct->caughtNick, GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBankAttacker ^ 1]], MON_DATA_SPECIES), GetMonGender(&gEnemyParty[gBattlerPartyIndexes[gBankAttacker ^ 1]]), GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBankAttacker ^ 1]], MON_DATA_PERSONALITY, 0), BattleMainCB2);
-            gBattleCommunication[0]++;
-        }
-        break;
-    case 3:
-        if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active )
-        {
-            SetMonData(&gEnemyParty[gBattlerPartyIndexes[gBankAttacker ^ 1]], MON_DATA_NICKNAME, gBattleStruct->caughtNick);
-            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
-        }
-        break;
-    case 4:
-        if (CalculatePlayerPartyCount() == 6)
-            gBattlescriptCurrInstr += 5;
-        else
-            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
-        break;
-    }
+    if (CalculatePlayerPartyCount() == 6)
+        gBattlescriptCurrInstr += 5;
+    else
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
 }
 
 static void atkF4_subattackerhpbydmg(void)

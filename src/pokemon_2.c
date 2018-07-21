@@ -959,6 +959,23 @@ void CopyMon(void *dest, void *src, size_t size)
     memcpy(dest, src, size);
 }
 
+u8 GiveMonToPlayerFromTrainer(struct Pokemon *mon)
+{
+    s32 i;
+
+    i = 0;
+
+    while (i < 6 && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL) != SPECIES_NONE)
+        i++;
+
+    if (i >= 6)
+        return SendMonToPC(mon);
+
+    CopyMon(&gPlayerParty[i], mon, sizeof(*mon));
+    gPlayerPartyCount = i + 1;
+    return 0;
+}
+
 u8 GiveMonToPlayer(struct Pokemon *mon)
 {
     s32 i;

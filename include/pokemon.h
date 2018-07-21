@@ -574,6 +574,7 @@ void SetMonData();
 void SetBoxMonData();
 
 void CopyMon(void *dest, void *src, size_t size);
+u8 GiveMonToPlayerFromTrainer(struct Pokemon *mon);
 u8 GiveMonToPlayer(struct Pokemon *mon);
 u8 SendMonToPC(struct Pokemon *mon);
 u8 CalculatePlayerPartyCount(void);

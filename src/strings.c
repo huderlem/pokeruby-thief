@@ -1854,3 +1854,5 @@ const u8 gSystemText_NoSaveFileNoTime[] = _("Es existiert kein Speicherstand. Uh
 const u8 gSystemText_ClockAdjustmentUsable[] = _("Das spielinterne Zeiteingabe-\nSystem ist jetzt verfügbar.");
 const u8 gSystemText_Saving[] = _("SPEICHERVORGANG...\nGERÄT NICHT AUSSCHALTEN!");
 #endif
+
+const u8 gOtherText_OnlyAllowedToSteal[] = _("DAD’s advice...\n{PLAYER}, you’re only allowed to steal POKéMON\lfrom trainers!{PAUSE_UNTIL_PRESS}");

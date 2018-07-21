@@ -1023,7 +1023,12 @@ void ItemUseOutOfBattle_EvolutionStone(u8 taskId)
 
 void ItemUseInBattle_PokeBall(u8 taskId)
 {
-    if (PlayerPartyAndPokemonStorageFull() == FALSE) // have room for mon?
+    if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER))
+    {
+        Menu_EraseWindowRect(0, 13, 13, 20);
+        DisplayItemMessageOnField(taskId, gOtherText_OnlyAllowedToSteal, CleanUpItemMenuMessage, 1);
+    }
+    else if (PlayerPartyAndPokemonStorageFull() == FALSE) // have room for mon?
     {
         RemoveBagItem(gSpecialVar_ItemId, 1);
         sub_80A7094(taskId);
