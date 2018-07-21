@@ -906,5 +906,6 @@ extern const u8 gSystemText_ClockAdjustmentUsable[];
 extern const u8 gSystemText_Saving[];
 
 extern const u8 gOtherText_OnlyAllowedToSteal[];
+extern const u8 gOtherText_ThatsNotAllowedInThief[];
 
 #endif

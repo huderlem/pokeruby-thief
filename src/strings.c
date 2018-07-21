@@ -1856,3 +1856,4 @@ const u8 gSystemText_Saving[] = _("SPEICHERVORGANG...\nGERÄT NICHT AUSSCHALTEN!
 #endif
 
 const u8 gOtherText_OnlyAllowedToSteal[] = _("DAD’s advice...\n{PLAYER}, you’re only allowed to steal POKéMON\lfrom trainers!{PAUSE_UNTIL_PRESS}");
+const u8 gOtherText_ThatsNotAllowedInThief[] = _("That’s not allowed!\nGo steal more POKéMON!{PAUSE_UNTIL_PRESS}");

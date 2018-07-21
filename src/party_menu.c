@@ -4700,43 +4700,14 @@ const u8 gUnknown_Debug_839B6D8[] = _(
 
 void DoRareCandyItemEffect(u8 taskId, u16 item, TaskFunc c)
 {
-    u8 i;
-    bool8 noEffect;
-
     gTasks[taskId].func = TaskDummy;
     sub_806E8D0(taskId, item, c);
 
-    if (GetMonData(ewram1C000.pokemon, MON_DATA_LEVEL) != 100)
-    {
-        for (i = 0; i < NUM_STATS; i++)
-            ewram1B000.statGrowths[i] = GetMonData(ewram1C000.pokemon, StatDataTypes[i]);
-        noEffect = ExecuteTableBasedItemEffect__(ewram1C000.primarySelectedMonIndex, item, 0);
-    }
-    else
-        noEffect = TRUE;
-
-    if (noEffect)
-    {
-        gUnknown_0202E8F4 = 0;
-        PlaySE(SE_SELECT);
-        sub_806E834(gOtherText_WontHaveAnyEffect, 1);
-        CreateTask(sub_806FB0C, 5);
-    }
-    else
-    {
-        u8 level;
-
-        gUnknown_0202E8F4 = 1;
-        PlayFanfareByFanfareNum(0);
-        RedrawPokemonInfoInMenu(ewram1C000.primarySelectedMonIndex, ewram1C000.pokemon);
-        RemoveBagItem(item, 1);
-        GetMonNickname(ewram1C000.pokemon, gStringVar1);
-        level = GetMonData(ewram1C000.pokemon, MON_DATA_LEVEL);
-        ConvertIntToDecimalStringN(gStringVar2, level, 0, 3);
-        StringExpandPlaceholders(gStringVar4, gOtherText_ElevatedTo);
-        sub_806E834(gStringVar4, 1);
-        CreateTask(Task_RareCandy1, 5);
-    }
+    // Always a no-op.
+    gUnknown_0202E8F4 = 0;
+    PlaySE(SE_SELECT);
+    sub_806E834(gOtherText_ThatsNotAllowedInThief, 1);
+    CreateTask(sub_806FB0C, 5);
 }
 
 void Task_RareCandy1(u8 taskId)
