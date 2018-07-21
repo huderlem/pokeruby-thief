@@ -1028,6 +1028,11 @@ void ItemUseInBattle_PokeBall(u8 taskId)
         Menu_EraseWindowRect(0, 13, 13, 20);
         DisplayItemMessageOnField(taskId, gOtherText_OnlyAllowedToSteal, CleanUpItemMenuMessage, 1);
     }
+    else if (gBattleTypeFlags & (BATTLE_TYPE_DOUBLE | BATTLE_TYPE_MULTI))
+    {
+        Menu_EraseWindowRect(0, 13, 13, 20);
+        DisplayItemMessageOnField(taskId, gOtherText_OnlyStealInSingleBattles, CleanUpItemMenuMessage, 1);
+    }
     else if (PlayerPartyAndPokemonStorageFull() == FALSE) // have room for mon?
     {
         RemoveBagItem(gSpecialVar_ItemId, 1);
