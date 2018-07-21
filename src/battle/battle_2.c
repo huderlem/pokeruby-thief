@@ -1061,7 +1061,7 @@ u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
                     nameHash += gSpeciesNames[partyData[i].species][j];
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * 31 / 255;
-                CreateMon(&party[i], partyData[i].species, partyData[i].level, fixedIV, TRUE, personalityValue, 2, 0);
+                CreateMonWithOTName(&party[i], partyData[i].species, partyData[i].level, fixedIV, TRUE, personalityValue, 2, 0, gTrainers[trainerNum].trainerName);
                 break;
             }
             case 1:
@@ -1072,7 +1072,7 @@ u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
                     nameHash += gSpeciesNames[partyData[i].species][j];
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * 31 / 255;
-                CreateMon(&party[i], partyData[i].species, partyData[i].level, fixedIV, TRUE, personalityValue, 2, 0);
+                CreateMonWithOTName(&party[i], partyData[i].species, partyData[i].level, fixedIV, TRUE, personalityValue, 2, 0, gTrainers[trainerNum].trainerName);
 
                 for (j = 0; j < 4; j++)
                 {
@@ -1089,7 +1089,7 @@ u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
                     nameHash += gSpeciesNames[partyData[i].species][j];
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * 31 / 255;
-                CreateMon(&party[i], partyData[i].species, partyData[i].level, fixedIV, TRUE, personalityValue, 2, 0);
+                CreateMonWithOTName(&party[i], partyData[i].species, partyData[i].level, fixedIV, TRUE, personalityValue, 2, 0, gTrainers[trainerNum].trainerName);
 
                 SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
                 break;
@@ -1102,7 +1102,7 @@ u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
                     nameHash += gSpeciesNames[partyData[i].species][j];
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * 31 / 255;
-                CreateMon(&party[i], partyData[i].species, partyData[i].level, fixedIV, TRUE, personalityValue, 2, 0);
+                CreateMonWithOTName(&party[i], partyData[i].species, partyData[i].level, fixedIV, TRUE, personalityValue, 2, 0, gTrainers[trainerNum].trainerName);
 
                 SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
                 for (j = 0; j < 4; j++)
