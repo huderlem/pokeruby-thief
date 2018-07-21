@@ -861,8 +861,6 @@ static void sub_8140454(struct Sprite *sprite)
     {
         gDoingBattleAnim = 0;
         UpdateOamPriorityInAllHealthboxes(1);
-        m4aMPlayAllStop();
-        PlaySE(MUS_FANFA5);
     }
     else if (sprite->data[4] == 315)
     {
