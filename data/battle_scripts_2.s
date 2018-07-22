@@ -64,8 +64,6 @@ BattleScript_PrintCaughtMonInfo: @ 81D9ED0
 	trysetcaughtmondexflags BattleScript_TryNicknameCaughtMon
 	printstring BATTLE_TEXT_AddedToDex
 	waitstate
-	setbyte gBattleCommunication, 0
-	displaydexinfo
 
 BattleScript_TryNicknameCaughtMon: @ 81D9EE3
 	trygivecaughtmonnick BattleScript_GiveCaughtMonEnd
